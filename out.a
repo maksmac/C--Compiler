@@ -1,0 +1,53 @@
+.data 	 		
+ 	nl: .asciiz "\n" 		
+.text 	 		
+.text 	 		#start instruction
+ 	.globl main 		#Global decleration for function
+main: 	 		#begin function
+ 	subu $t0, $sp, 40 		#add offset for stack
+ 	sw $ra, 4($t0) 		#store return address in stack
+ 	sw $sp, ($t0) 		#save old sp
+ 	addu $sp, $t0, 0 		#move sp back up
+ 	li   $t6, 10 		#load immediate value into register $t6
+ 	sw  $t6, 20($sp) 		#get value from the stack pointer
+ 	li  $t2, 8 		# Load ID offset into $t2
+ 	add $t2, $t2, $sp 		# Create exact mem location for ID
+ 	lw  $t6, 20($sp) 		#get value from the stack pointer
+ 	sw   $t6, ($t2) 		#store word into $t6 from $t2
+ 	li   $t6, 15 		#load immediate value into register $t6
+ 	sw  $t6, 24($sp) 		#get value from the stack pointer
+ 	li  $t2, 12 		# Load ID offset into $t2
+ 	add $t2, $t2, $sp 		# Create exact mem location for ID
+ 	lw  $t6, 24($sp) 		#get value from the stack pointer
+ 	sw   $t6, ($t2) 		#store word into $t6 from $t2
+ 	li   $t6, 20 		#load immediate value into register $t6
+ 	sw  $t6, 28($sp) 		#get value from the stack pointer
+ 	li  $t2, 16 		# Load ID offset into $t2
+ 	add $t2, $t2, $sp 		# Create exact mem location for ID
+ 	lw  $t6, 28($sp) 		#get value from the stack pointer
+ 	sw   $t6, ($t2) 		#store word into $t6 from $t2
+ 	li  $t2, 8 		# Load ID offset into $t2
+ 	add $t2, $t2, $sp 		# Create exact mem location for ID
+ 	lw $t0, ($t2) 		#load word from left into t0
+ 	sw  $t0, 32($sp) 		#first store value from stack into t0
+ 	li  $t2, 16 		# Load ID offset into $t2
+ 	add $t2, $t2, $sp 		# Create exact mem location for ID
+ 	lw $t1, ($t2) 		#load word from right into t0
+ 	lw  $t0, 32($sp) 		#second load value back from stack into t0
+ 	add  $t0, $t0, $t1 		#add t0 + t1 and store in t0
+ 	sw  $t0, 32($sp) 		#third store value back into stack pointer
+ 	lw  $t0, 32($sp) 		#load word from left to $t0
+ 	sw  $t0, 36($sp) 		#first store value from stack into t0
+ 	li  $t2, 12 		# Load ID offset into $t2
+ 	add $t2, $t2, $sp 		# Create exact mem location for ID
+ 	lw $t1, ($t2) 		#load word from right into t0
+ 	lw  $t0, 36($sp) 		#second load value back from stack into t0
+ 	sub  $t0, $t0, $t1 		#sub t0 - t1 and store in t0
+ 	sw  $t0, 36($sp) 		#third store value back into stack pointer
+ 	lw  $v0, 0($sp) 		#load word from sp into v0
+ 	lw  $ra, 4($sp) 		#load 4($sp) into $ra
+ 	lw   $sp, ($sp) 		#load the value at $sp back into ($sp)
+ 	jr   $ra 		
+ 	lw  $ra, 4($sp) 		#load 4($sp) into $ra
+ 	lw   $sp, ($sp) 		#load the value at $sp back into ($sp)
+ 	jr   $ra 		
